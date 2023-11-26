@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic List Example</title>
+    <style>
+        /* Basic styling for better presentation */
+        #itemList {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .listItem {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+
+        .listItem button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Input field, button, and list -->
+<div>
+    <label for="newItemInput">Add New Item:</label>
+    <input type="text" id="newItemInput" placeholder="Enter a new item">
+    <button onclick="addItem()">Add Item</button>
+</div>
+<ul id="itemList"></ul>
+
+<script>
+    function addItem() {
+        // Get the input field and the list
+        var newItemInput = document.getElementById("newItemInput");
+        var itemList = document.getElementById("itemList");
+
+        // Get the value entered by the user
+        var newItemText = newItemInput.value;
+
+        // Check if the input is not empty
+        if (newItemText.trim() !== "") {
+            // Create a new list item element
+            var listItem = document.createElement("li");
+            listItem.className = "listItem";
+
+            // Create a span for the item text
+            var itemTextSpan = document.createElement("span");
+            itemTextSpan.textContent = newItemText;
+            listItem.appendChild(itemTextSpan);
+
+            // Create a button to remove the item
+            var removeButton = document.createElement("button");
+            removeButton.textContent = "Remove";
+            removeButton.onclick = function() {
+                // Remove the parent list item when the button is clicked
+                itemList.removeChild(listItem);
+            };
+            listItem.appendChild(removeButton);
+
+            // Append the new item to the list
+            itemList.appendChild(listItem);
+
+            // Clear the input field for the next item
+            newItemInput.value = "";
+        }
+    }
+</script>
+
+</body>
+</html>
